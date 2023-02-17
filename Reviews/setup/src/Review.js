@@ -7,30 +7,32 @@ const Review = () => {
   const { name, job, image, text } = people[index]
 
   const nextPerson = () => {
-    const currentIndex = index
-    const nextIndex = currentIndex + 1
-    console.log(currentIndex)
-    if (nextIndex > people.length - 1) {
-      setIndex(0)
-    } else {
-      setIndex(nextIndex)
-    }
+    setIndex((index) => {
+      const nextIndex = index + 1
+      if (nextIndex > people.length - 1) {
+        return 0
+      } else {
+        return nextIndex
+      }
+    })
   }
 
   const prevPerson = () => {
-    const currentIndex = index
-    const prevIndex = currentIndex - 1
-    if (prevIndex < 0) {
-      setIndex(people.length - 1)
-    } else {
-      setIndex(prevIndex)
-    }
+    setIndex((index) => {
+      const prevIndex = index - 1
+      if (prevIndex < 0) {
+        return people.length - 1
+      } else {
+        return prevIndex
+      }
+    })
   }
 
   const randomPerson = () => {
-    const randPerson = Math.floor(Math.random() * (3 - 0 + 1) + 0)
-    console.log(randPerson)
-    setIndex(randPerson)
+    setIndex(() => {
+      const randPerson = Math.floor(Math.random() * (3 - 0 + 1) + 0)
+      return randPerson
+    })
   }
 
   return (
@@ -45,10 +47,16 @@ const Review = () => {
       <p className='job'>{job}</p>
       <p className='info'>{text}</p>
       <div className='button-container'>
-        <button className='prev-btn' onClick={() => prevPerson()}><FaChevronLeft /></button>
-        <button className='next-btn' onClick={() => nextPerson()}><FaChevronRight /></button>
+        <button className='prev-btn' onClick={() => prevPerson(index)}>
+          <FaChevronLeft />
+        </button>
+        <button className='next-btn' onClick={() => nextPerson(index)}>
+          <FaChevronRight />
+        </button>
       </div>
-        <button className='random-btn' onClick={() => randomPerson()}>Random Person</button>
+      <button className='random-btn' onClick={() => randomPerson()}>
+        Random Person
+      </button>
     </article>
   )
 }
