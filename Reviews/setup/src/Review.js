@@ -10,27 +10,25 @@ const Review = () => {
     const currentIndex = index
     const nextIndex = currentIndex + 1
     console.log(currentIndex)
-    if(nextIndex > people.length-1)
-    {
-      setIndex(0);
-    }else{
+    if (nextIndex > people.length - 1) {
+      setIndex(0)
+    } else {
       setIndex(nextIndex)
     }
   }
 
   const prevPerson = () => {
-     const currentIndex = index
-     const prevIndex = currentIndex - 1
-     if(prevIndex < 0)
-     {
-      setIndex(people.length-1)
-     }else{
+    const currentIndex = index
+    const prevIndex = currentIndex - 1
+    if (prevIndex < 0) {
+      setIndex(people.length - 1)
+    } else {
       setIndex(prevIndex)
-     }
+    }
   }
 
   const randomPerson = () => {
-    const randPerson = Math.floor(Math.random() * (3-0+1) + 0)
+    const randPerson = Math.floor(Math.random() * (3 - 0 + 1) + 0)
     console.log(randPerson)
     setIndex(randPerson)
   }
@@ -46,9 +44,11 @@ const Review = () => {
       <h4 className='author'>{name}</h4>
       <p className='job'>{job}</p>
       <p className='info'>{text}</p>
-      <button onClick={() => nextPerson()}>Next</button>
-      <button onClick={() => prevPerson()}>Prev</button>
-      <button onClick={()=> randomPerson()}>Random Person</button>
+      <div className='button-container'>
+        <button className='prev-btn' onClick={() => prevPerson()}><FaChevronLeft /></button>
+        <button className='next-btn' onClick={() => nextPerson()}><FaChevronRight /></button>
+      </div>
+        <button className='random-btn' onClick={() => randomPerson()}>Random Person</button>
     </article>
   )
 }
