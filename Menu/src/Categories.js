@@ -1,23 +1,22 @@
 import React from 'react';
-import items from './data';
 //map over categories
 //create button for each category
 //return fileter Items with each button
-const Categories = ({ filterItems }) => {
-  const cats = [...new Set(items.map((e) => e.category))];
+const Categories = ({ categories, filterItems }) => {
   return (
     <div className='btn-container'>
-      {items.map((e) => {
-        const { category } = e;
+      {categories.map((category, index) => {
         return (
-          <div>
-            <button className='filter-btn' 
-              onClick={() => {
-                filterItems(category);
-              }}>
-            <> {category}</>
-            </button>
-          </div>
+          <button
+            type='button'
+            className='filter-btn'
+            key={index}
+            onClick={() => 
+              filterItems(category)
+            }
+          >
+            {category}
+          </button>
         );
       })}
     </div>
