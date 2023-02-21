@@ -10,9 +10,8 @@ import data from './data';
 
 function App() {
   const [index, setIndex] = useState(0);
-  const [person, setPerson] = useState(data)
+  const [person, setPerson] = useState(data);
 
-  
   return (
     <section className='section'>
       <div className='title'>
@@ -23,10 +22,12 @@ function App() {
       <div className='section-center'>
         {person.map((e, eIndex) => {
           const { id, image, name, title, quote } = e;
-          let position = 'nextSlide'
-          if(eIndex === index)
-          {
-            position = 'activeSlide'
+          let position = 'nextSlide';
+          if (eIndex === index) {
+            position = 'activeSlide';
+          }
+          if (eIndex === index - 1 || (index === 0 && personIndex == people.length - 1)) {
+            position = 'lastSlide';
           }
 
           return (
