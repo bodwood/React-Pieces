@@ -12,6 +12,24 @@ function App() {
   const [index, setIndex] = useState(0);
   const [person, setPerson] = useState(data);
 
+  useEffect(()=> {
+    const lastIndex = person.length - 1;
+    if(index < 0) {
+      setIndex(lastIndex);
+    }
+    if(index > lastIndex)
+    {
+      setIndex(0)
+    }
+  }, [index, person])
+
+useEffect(()=>{
+ let slider = setInterval(() => {
+    setIndex(index +1)
+  }, 3000);
+  return ()=> clearInterval(slider);
+}, [index])
+
   return (
     <section className='section'>
       <div className='title'>
@@ -26,7 +44,7 @@ function App() {
           if (eIndex === index) {
             position = 'activeSlide';
           }
-          if (eIndex === index - 1 || (index === 0 && personIndex == people.length - 1)) {
+          if (eIndex === index - 1 || (index === 0 && eIndex === e.length - 1)) {
             position = 'lastSlide';
           }
 
@@ -40,10 +58,10 @@ function App() {
             </article>
           );
         })}
-        <button className='prev'>
+        <button className='prev' onClick={()=> setIndex(index - 1)}>
           <FiChevronLeft />
         </button>
-        <button className='next'>
+        <button className='next' onClick={()=> setIndex(index + 1)}>
           <FiChevronRight />
         </button>
       </div>
