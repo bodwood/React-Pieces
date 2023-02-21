@@ -3,23 +3,22 @@ import Menu from './Menu';
 import Categories from './Categories';
 import items from './data';
 
-const allCategories = ['all', ...new Set(items.map((e) => e.category))];
-
+const allCategories = ['all', ...new Set(items.map((item) => item.category))]
 
 function App() {
   const [menuItems, setMenuItems] = useState(items);
   const [categories, setCategories] = useState(allCategories);
 
-  const filterItems = (category) => {
+  const sortedItems = (category) => {
     if(category === 'all')
     {
       setMenuItems(items)
       return;
-    }else{
-    const newItems = items.filter((item) => item.category === category);
-    setMenuItems(newItems);
     }
-  };
+      const newArr = items.filter((e) => e.category === category)
+      setMenuItems(newArr);
+    
+  }
 
   return (
     <main>
@@ -28,7 +27,7 @@ function App() {
           <h2>Our Menu</h2>
           <div className='underline'></div>
         </div>
-        <Categories filterItems={filterItems} categories={categories}/>
+        <Categories sortedItems={sortedItems} categories={categories} />
         <Menu items={menuItems} />
       </section>
     </main>
